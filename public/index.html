@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+</head>
+
+<body>
+        <input id="nimi" type="text" placeholder="Nimi" name="nimi">
+        <input id="osoite" type="text" placeholder="Osoite" name="osoite">
+        <select class="avain" id="avain" name="avain">
+            <option value="">Hae kaikilla tyypeillä</option>
+        </select>
+        <button id="searchBtn">Hae</button>
+
+
+    <div class="dataTable" id="dataTable">
+        <table class="data" id="data">
+            <thead>
+                <tr>
+                    <th>Nimi</th>
+                    <th>Osoite</th>
+                    <th>Postinumero</th>
+                    <th>Postitoimipaikka</th>
+                    <th>Luontipäivämäärä</th>
+                    <th>Asiakastyyppi</th>
+                    <th style="min-width: 100px; max-width: 125px;">
+                        <!--poista-näppäimet tähän sarakkeeseen-->
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="taulukko">
+            </tbody>
+        </table>
+    </div>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
