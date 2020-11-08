@@ -17,16 +17,16 @@ module.exports = {
                 res.json(results);
         });
     },
-    
+
 
     haeAsiakkaat: function (req, res) {
         var nimi = req.query.nimi;
         var osoite = req.query.osoite;
-        var tyyppi = req.query.avain;
+        var avain = req.query.avain;
         console.log(req.query.osoite)
         console.log("nimi: " + nimi);
         console.log("osoite: " + osoite);
-        console.log("tyyppi: " + tyyppi);
+        console.log("tyyppi: " + avain);
 
         var sql = "SELECT * FROM ASIAKAS WHERE 1=1";
         if(req.query.hasOwnProperty('nimi') != false){
@@ -35,8 +35,8 @@ module.exports = {
           if(req.query.hasOwnProperty('osoite') != false){
             sql = sql + " AND osoite like '" + osoite + "%'";
           }
-          if(req.query.hasOwnProperty('asty') != false){
-            sql = sql + " AND asty_avain like '" + asty + "%'";
+          if(req.query.hasOwnProperty('avain') != false){
+            sql = sql + " AND asty_avain like '" + avain + "%'";
           }
         connection.query(sql, function (error, results, fields) {
                 console.log("Data = " + JSON.stringify(results));
