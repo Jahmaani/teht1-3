@@ -17,6 +17,7 @@ module.exports = {
                 res.json(results);
         });
     },
+    
 
     haeAsiakkaat: function (req, res) {
         var nimi = req.query.nimi;
