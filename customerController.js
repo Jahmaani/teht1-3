@@ -23,7 +23,7 @@ module.exports = {
         var nimi = req.query.nimi;
         var osoite = req.query.osoite;
         var avain = req.query.avain;
-        console.log(req.query.osoite)
+        console.log(req.query);
         console.log("nimi: " + nimi);
         console.log("osoite: " + osoite);
         console.log("tyyppi: " + avain);
