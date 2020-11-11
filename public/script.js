@@ -3,21 +3,22 @@ $(document).ready(function () {
     function haeTyypit() {
         $.get(
             {
-                url : `http://localhost:3000/Tyypit`,
-                success : (result) => {
+                url: `http://localhost:3000/Tyypit`,
+                success: (result) => {
                     result.forEach(element => {
-                        $("#avain").append("<option value='"+element.Avain+"'>"+element.Lyhenne+" - "+element.Selite+"</option>");
+                        var optionstring = "<option value='" + element.Avain + "'>" + element.Lyhenne + " - " + element.Selite + "</option>"
+                        $(".avain").append(optionstring);
                     });
                 }
             }
         )
     }
 
-    fetch = () => {
+    hae = () => {
         $("tbody").empty();
         $.get({
             url: `http://localhost:3000/haeAsiakkaat`,
-            data : {
+            data: {
                 nimi: $("#nimi").val(),
                 osoite: $("#osoite").val(),
                 avain: $("#avain").val()
@@ -28,8 +29,55 @@ $(document).ready(function () {
         });
     };
 
+    lisaa = () => {
+        $("tbody").empty();
+        $.post({
+            url: `http://localhost:3000/lisaa`,
+            data: {
+                nimi: $("#lnimi").val(),
+                osoite: $("#losoite").val(),
+                postinro: $("#lpostinro").val(),
+                postitmp: $("#lpostitmp").val(),
+                avain: $("#lavain").val()
+            },
+            success: (result) => {
+                console.log(result);
+                if (result === "200") {
+                    alert("LISÄYS ONNISTUI!");
+                    hae();
+                } else {
+                    alert("LISÄYS EI ONNISTUNUT, TIEDOT PITÄÄ TÄYTTÄÄ OIKEIN!");
+                    hae();
+                }
+            },
+        });
+    };
+
+    poista = (id) => {
+        $.ajax({
+            url: `http://localhost:3000/poista`,
+            type: "delete",
+            data: {
+                avain: (id)
+            },
+            success: (result) => {
+                alert("Poisto onnistui!")
+                hae();
+            }
+        });
+    }
+
     $("#searchBtn").click(() => {
-        fetch();
+        hae();
+    });
+
+    $("#lisaaBtn").click(() => {
+        lisaa();
+    });
+
+    $("#poistaBtn").click((id) => {
+        id = $(this).val();
+        poista();
     });
 });
 
@@ -41,6 +89,14 @@ showResultInTable = (result) => {
         trstr += "<td>" + element.POSTITMP + "</td>\n";
         trstr += "<td>" + element.LUONTIPVM + "</td>\n";
         trstr += "<td>" + element.ASTY_AVAIN + "</td>";
+        trstr +=
+            "<td><button class='btn btn-warning' 'poistaBtn' value=" +
+            element.AVAIN +
+            " onclick=poista(" +
+            element.AVAIN +
+            ")>" +
+            "poista" +
+            "</button></td>";
         trstr += "</tr>\n";
         $("#data tbody").append(trstr);
     });
